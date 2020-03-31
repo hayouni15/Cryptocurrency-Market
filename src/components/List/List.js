@@ -3,7 +3,7 @@ import './table.css'
 import Loading from '../common/Loading'
 import Table from '../common/Table';
 import Pagination from "../List/pagination"
-import Detail from "../detail/detail"
+
 
 
 class List extends React.Component {
