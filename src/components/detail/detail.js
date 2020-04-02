@@ -15,20 +15,28 @@ class Detail extends React.Component {
     }
     componentDidMount() {
         const currencyID = this.props.match.params.id
-        console.log(currencyID)
+        //console.log(this.props)
+        this.fetchCurrency(currencyID)
 
-        fetch(`https://api.nomics.com/v1/currencies/ticker?key=fa577bb3584896f7393c3b5584807496&ids=${currencyID}&interval=1d,30d&convert=EUR`)
+        
+    }
+
+    fetchCurrency(currencyId){
+        fetch(`https://api.nomics.com/v1/currencies/ticker?key=fa577bb3584896f7393c3b5584807496&ids=${currencyId}&interval=1d,30d&convert=EUR`)
             .then((response) => {
                 return response.json().then(json => {
                     return response.ok ? json : Promise.reject(json);
                 });
             })
             .then((data) => {
-                console.log(data);
+                console.log('data',data);
                 this.setState({
                     data: data[0],
                     loading: false
+                },()=>{
+                    console.log(data);
                 })
+                
             })
             .catch((error) => {
                 console.log(error);
@@ -37,6 +45,13 @@ class Detail extends React.Component {
                     loading: false
                 })
             });;
+
+    }
+    componentWillReceiveProps(nextProps){
+        //console.log(nextProps)
+        const currencyID = nextProps.match.params.id
+        this.fetchCurrency(currencyID)
+
     }
 
     renderChangePercent(percent) {

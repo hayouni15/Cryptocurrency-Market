@@ -1,5 +1,5 @@
 import React from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import './search.css'
 import Loading from './Loading'
 
@@ -50,6 +50,13 @@ class Search extends React.Component {
 
     }
 
+    henadleRedirect(id){
+        console.log(id)
+        this.setState({searchQuery: '',})
+        this.props.history.push(`/currency/${id}`)
+
+    }
+
     renderSearchResults(){
         const{data}=this.state
         if (data.length>0){
@@ -59,6 +66,7 @@ class Search extends React.Component {
                         <div 
                             key={result.id}
                             className="Search-result"
+                            onClick={()=> this.henadleRedirect(result.id)}
                         >
                             {result.name} ({result.symbol})
                         </div>
@@ -86,7 +94,9 @@ class Search extends React.Component {
                     className="Search-input"
                     type="text"
                     placeholder="Currency"
-                    onChange={this.handleChange} />
+                    onChange={this.handleChange}
+                    value={this.state.searchQuery} />
+                    
 
 
                 {this.state.loading &&

@@ -10,9 +10,9 @@ const containerStyle={
 const Header=()=>{
     return (
         <div className="Header" style={{containerStyle}}>
-            <Link to="/"><img src={logo} alt="logo" className="Header-logo"></img></Link>
+            <Link className="Header-logo" style={{ textDecoration: 'none',color:'white' }} to="/"><div ></div>Crypto Market</Link>
             
-            Crypto Market
+            
             <Search/>
         </div>
     )
